@@ -1,0 +1,6 @@
+/bin/
+/build/
+/dist/
+test.py
+/.idea/
+__pycache__
