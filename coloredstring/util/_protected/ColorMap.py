@@ -12,7 +12,7 @@ class ColorMap(ColorInterface):
     Blue = 4
     Magenta = 5
     Cyan = 6
-    LightGray = 7
+    Gray = 7
     DarkGray = 60
     LightRed = 61
     LightGreen = 62

@@ -55,6 +55,9 @@ class ColoredString(object):
     def setBackgroundColor(self, colorCode):
         return self.__setColor(BackgroundColor.getColor(colorCode))
 
+    def setAttribute(self, attributeCode):
+        return self.__setColor(Attribute.getColor(attributeCode))
+
     @classmethod
     def render(cls, stringToRender):
         result = stringToRender
