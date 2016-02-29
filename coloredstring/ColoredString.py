@@ -17,27 +17,27 @@ class ColoredString(object):
     _questionPrompt = '{{">>>"|fg=white|attr=bold}} '
 
     @classmethod
-    def SuccessMessage(cls, message):
-        return cls._createMessage(message, cls._successMessagePrompt)
+    def success_message(cls, message):
+        return cls._create_message(message, cls._successMessagePrompt)
 
     @classmethod
-    def WarningMessage(cls, message):
-        return cls._createMessage(message, cls._warningMessagePrompt)
+    def warning_message(cls, message):
+        return cls._create_message(message, cls._warningMessagePrompt)
 
     @classmethod
-    def ErrorMessage(cls, message):
-        return cls._createMessage(message, cls._errorMessagePrompt)
+    def error_message(cls, message):
+        return cls._create_message(message, cls._errorMessagePrompt)
 
     @classmethod
-    def InfoMessage(cls, message):
-        return cls._createMessage(message, cls._infoMessagePrompt)
+    def info_message(cls, message):
+        return cls._create_message(message, cls._infoMessagePrompt)
 
     @classmethod
-    def QuestionMessage(cls, message):
-        return cls._createMessage(message, cls._questionPrompt)
+    def question_message(cls, message):
+        return cls._create_message(message, cls._questionPrompt)
 
     @classmethod
-    def _createMessage(cls, message, prompt):
+    def _create_message(cls, message, prompt):
         return str(cls(prompt)) + str(cls(message))
 
     def __add__(self, other):
@@ -49,49 +49,49 @@ class ColoredString(object):
     def __str__(self):
         return self.render(self.__string)
 
-    def setForegroundColor(self, colorCode):
-        return self.__setColor(ForegroundColor.getColor(colorCode))
+    def set_foreground_color(self, color_code):
+        return self.__set_color(ForegroundColor.get_color(color_code))
 
-    def setBackgroundColor(self, colorCode):
-        return self.__setColor(BackgroundColor.getColor(colorCode))
+    def set_background_color(self, color_code):
+        return self.__set_color(BackgroundColor.get_color(color_code))
 
-    def setAttribute(self, attributeCode):
-        return self.__setColor(Attribute.getColor(attributeCode))
+    def set_attribute(self, attribute_code):
+        return self.__set_color(Attribute.get_color(attribute_code))
 
     @classmethod
-    def render(cls, stringToRender):
-        result = stringToRender
-        parts = cls._matcher.finditer(stringToRender)
+    def render(cls, string_to_render):
+        result = string_to_render
+        parts = cls._matcher.finditer(string_to_render)
         for part in parts:
             subparts = cls._subMatcher.finditer(part.group('expression'))
             subresult = part.group('content')
             for subpart in subparts:
-                subresult = str(cls.__wrapWithColor(subpart, subresult))
+                subresult = str(cls.__wrap_with_color(subpart, subresult))
             result = result.replace(part.group(0), str(subresult))
-        return result + ForegroundColor.getColor(ForegroundColor.Default)
+        return result + ForegroundColor.get_color(ForegroundColor.Default)
 
     @classmethod
-    def __wrapWithColor(cls, regexMatch, string):
-        colorName = regexMatch.group('colorName')
-        colorType = regexMatch.group('type')
-        if colorName is None or colorType is None:
+    def __wrap_with_color(cls, regex_match, string):
+        color_name = regex_match.group('colorName')
+        color_type = regex_match.group('type')
+        if color_name is None or color_type is None:
             return string
-        return cls(string).__setColor(cls.__getColorByName(colorName, colorType))
+        return cls(string).__set_color(cls.__get_color_by_name(color_name, color_type))
 
     @classmethod
-    def __getColorByName(cls, colorName, colorType):
-        if colorType == 'bg':
-            colorType = BackgroundColor
-        elif colorType == 'fg':
-            colorType = ForegroundColor
+    def __get_color_by_name(cls, color_name, color_type):
+        if color_type == 'bg':
+            color_type = BackgroundColor
+        elif color_type == 'fg':
+            color_type = ForegroundColor
         else:
-            colorType = Attribute
-        colorName = colorName[0].upper() + colorName[1:]
-        color = colorType.mro()[-3].__dict__.get(colorName)
+            color_type = Attribute
+        color_name = color_name[0].upper() + color_name[1:]
+        color = color_type.mro()[-3].__dict__.get(color_name)
         if color is None:
-            color = colorType.Default
-        return colorType.getColor(color)
+            color = color_type.Default
+        return color_type.get_color(color)
 
-    def __setColor(self, color):
-        self.__string = color + self.__string
+    def __set_color(self, color):
+        self.__string += color
         return self

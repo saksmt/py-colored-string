@@ -39,7 +39,7 @@ API
  * Hidden
  * Default
  
-NOTE: Enumerations have method `getColor` for creating string with escape sequence
+NOTE: Enumerations have method `get_color` for creating string with escape sequence
 
 **Classes:**
 
@@ -49,13 +49,13 @@ Methods:
 
  * Static:
   * `render(string)` - renders string in specified [format](format.md)
-  * `SuccessMessage(message)` - renders message with leading green *" \* "*
-  * `InfoMessage(message)` - renders message with leading cyan *" \* "*
-  * `WarningMessage(message)` - renders message with leading yellow *" \* "*
-  * `ErrorMessage(message)` - renders message with leading red *" \* "*
-  * `QuestionMessage(message)` - renders message with leading bold white *">>> "*
+  * `success_message(message)` - renders message with leading green *" \* "*
+  * `info_message(message)` - renders message with leading cyan *" \* "*
+  * `warning_message(message)` - renders message with leading yellow *" \* "*
+  * `error_message(message)` - renders message with leading red *" \* "*
+  * `question_message(message)` - renders message with leading bold white *">>> "*
   
  * Instance:
-  * `setBackgroundColor(colorCode)` - set's background color for object, `colorCode` - code from enumeration
-  * `setForegroundColor(colorCode)` - set's foreground color for object, `colorCode` - code from enumeration
-  * `setAttribute(attributeCode)` - set's attribute for object, `attributeCode` - code from enumeration
+  * `set_background_color(color_code)` - set's background color for object, `color_code` - code from enumeration
+  * `set_foreground_color(color_code)` - set's foreground color for object, `color_code` - code from enumeration
+  * `set_attribute(attribute_code)` - set's attribute for object, `attribute_code` - code from enumeration

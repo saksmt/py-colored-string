@@ -1,9 +1,9 @@
-from .ColorInterface import ColorInterface
+from .Color import Color
 
 __author__ = 'smt'
 
 
-class ColorMap(ColorInterface):
+class ColorMap(Color):
 
     Black = 0
     Red = 1
@@ -26,7 +26,7 @@ class ColorMap(ColorInterface):
     _base = 0
 
     @classmethod
-    def getColor(cls, colorCode):
-        if colorCode == cls.Default:
-            colorCode = -cls._base
-        return "\033[" + str(cls._base + colorCode) + "m"
+    def get_color(cls, color_code):
+        if color_code == cls.Default:
+            color_code = -cls._base
+        return "\033[" + str(cls._base + color_code) + "m"

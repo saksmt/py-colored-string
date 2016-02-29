@@ -1,9 +1,9 @@
-from ._protected.ColorInterface import ColorInterface
+from ._protected.Color import Color
 
 __author__ = 'smt'
 
 
-class Attribute(ColorInterface):
+class Attribute(Color):
 
     Bold = 1
     Dim = 2
@@ -14,5 +14,5 @@ class Attribute(ColorInterface):
     Default = 0
 
     @classmethod
-    def getColor(cls, colorCode):
-        return "\033[" + str(colorCode) + "m"
+    def get_color(cls, color_code):
+        return "\033[" + str(color_code) + "m"
